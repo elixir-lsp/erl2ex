@@ -20,7 +20,7 @@ defmodule StructureTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -33,7 +33,7 @@ defmodule StructureTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -64,7 +64,7 @@ defmodule StructureTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -100,7 +100,7 @@ defmodule StructureTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -118,7 +118,7 @@ defmodule StructureTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -131,7 +131,7 @@ defmodule StructureTest do
       @on_load :foo
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -144,7 +144,7 @@ defmodule StructureTest do
       @vsn 123
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -157,7 +157,7 @@ defmodule StructureTest do
       @behaviour :gen_server
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -170,7 +170,7 @@ defmodule StructureTest do
       @behaviour :gen_server
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -188,7 +188,7 @@ defmodule StructureTest do
       @callback bar(a, b) :: a | b when a: tuple(), b: atom()
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -201,7 +201,7 @@ defmodule StructureTest do
       # File "myfile.erl" Line 10
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -226,7 +226,7 @@ defmodule StructureTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -245,7 +245,7 @@ defmodule StructureTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 end

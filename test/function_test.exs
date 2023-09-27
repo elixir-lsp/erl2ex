@@ -1,7 +1,7 @@
 defmodule FunctionTest do
   use ExUnit.Case
 
-  import Erl2ex.TestHelper
+  import Erl2exVendored.TestHelper
 
 
   @opts [emit_file_headers: false]
@@ -18,7 +18,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -33,7 +33,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -48,7 +48,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -70,7 +70,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -85,7 +85,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -100,7 +100,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -115,7 +115,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -130,7 +130,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -157,7 +157,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -188,7 +188,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -216,7 +216,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -270,7 +270,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -291,7 +291,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -337,7 +337,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -382,7 +382,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -401,7 +401,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -422,7 +422,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -443,7 +443,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -464,7 +464,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -487,7 +487,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -502,7 +502,7 @@ defmodule FunctionTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 

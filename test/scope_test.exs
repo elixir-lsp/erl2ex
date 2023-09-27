@@ -28,7 +28,7 @@ defmodule ScopeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -44,7 +44,7 @@ defmodule ScopeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -62,7 +62,7 @@ defmodule ScopeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -91,7 +91,7 @@ defmodule ScopeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -114,7 +114,7 @@ defmodule ScopeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -134,7 +134,7 @@ defmodule ScopeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -149,7 +149,7 @@ defmodule ScopeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -169,7 +169,7 @@ defmodule ScopeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -189,7 +189,7 @@ defmodule ScopeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -213,7 +213,7 @@ defmodule ScopeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -239,7 +239,7 @@ defmodule ScopeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -261,7 +261,7 @@ defmodule ScopeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -284,7 +284,7 @@ defmodule ScopeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 

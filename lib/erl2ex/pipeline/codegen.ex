@@ -2,21 +2,21 @@
 # It takes as input a data structure as defined in ex_data.ex that includes
 # Elixir AST and some accompanying metadata, and generates Elixir source code.
 
-defmodule Erl2ex.Pipeline.Codegen do
+defmodule Erl2exVendored.Pipeline.Codegen do
 
   @moduledoc false
 
-  alias Erl2ex.Pipeline.ExAttr
-  alias Erl2ex.Pipeline.ExComment
-  alias Erl2ex.Pipeline.ExDirective
-  alias Erl2ex.Pipeline.ExFunc
-  alias Erl2ex.Pipeline.ExHeader
-  alias Erl2ex.Pipeline.ExImport
-  alias Erl2ex.Pipeline.ExMacro
-  alias Erl2ex.Pipeline.ExModule
-  alias Erl2ex.Pipeline.ExRecord
-  alias Erl2ex.Pipeline.ExSpec
-  alias Erl2ex.Pipeline.ExType
+  alias Erl2exVendored.Pipeline.ExAttr
+  alias Erl2exVendored.Pipeline.ExComment
+  alias Erl2exVendored.Pipeline.ExDirective
+  alias Erl2exVendored.Pipeline.ExFunc
+  alias Erl2exVendored.Pipeline.ExHeader
+  alias Erl2exVendored.Pipeline.ExImport
+  alias Erl2exVendored.Pipeline.ExMacro
+  alias Erl2exVendored.Pipeline.ExModule
+  alias Erl2exVendored.Pipeline.ExRecord
+  alias Erl2exVendored.Pipeline.ExSpec
+  alias Erl2exVendored.Pipeline.ExType
 
 
   # Generate code and write to the given IO.

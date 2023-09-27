@@ -1,8 +1,8 @@
 
-defmodule Erl2ex.Source do
+defmodule Erl2exVendored.Source do
 
   @moduledoc """
-  Erl2ex.Source is a process that produces Erlang source, normally reading
+  Erl2exVendored.Source is a process that produces Erlang source, normally reading
   files from the file system.
   """
 
@@ -31,7 +31,7 @@ defmodule Erl2ex.Source do
   tuple comprising the data in the file and the full path to it.
   """
 
-  @spec read_source(t, Erl2ex.file_id) :: {String.t, Erl2ex.file_id}
+  @spec read_source(t, Erl2exVendored.file_id) :: {String.t, Erl2exVendored.file_id}
 
   def read_source(source, path) do
     source

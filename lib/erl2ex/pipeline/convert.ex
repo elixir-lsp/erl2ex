@@ -7,17 +7,17 @@
 # Much of the code for the convert phase lives in modules in the convert
 # directory.
 
-defmodule Erl2ex.Pipeline.Convert do
+defmodule Erl2exVendored.Pipeline.Convert do
 
   @moduledoc false
 
 
-  alias Erl2ex.Pipeline.ExModule
+  alias Erl2exVendored.Pipeline.ExModule
 
-  alias Erl2ex.Convert.Context
-  alias Erl2ex.Convert.ErlForms
-  alias Erl2ex.Convert.ExtForms
-  alias Erl2ex.Convert.Headers
+  alias Erl2exVendored.Convert.Context
+  alias Erl2exVendored.Convert.ErlForms
+  alias Erl2exVendored.Convert.ExtForms
+  alias Erl2exVendored.Convert.Headers
 
 
   # The entry point of the convert phase. Takes a ModuleData as input and

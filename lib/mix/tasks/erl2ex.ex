@@ -1,8 +1,8 @@
 # Mix task for erl2ex
 
-defmodule Mix.Tasks.Erl2ex do
+defmodule Mix.Tasks.Erl2exVendored do
 
-  @moduledoc Erl2ex.Cli.usage_text("mix erl2ex")
+  @moduledoc Erl2exVendored.Cli.usage_text("mix erl2ex")
 
   @shortdoc "Transpiles Erlang source to Elixir"
 
@@ -10,7 +10,7 @@ defmodule Mix.Tasks.Erl2ex do
 
 
   def run(args) do
-    Erl2ex.Cli.main(args)
+    Erl2exVendored.Cli.main(args)
   end
 
 end

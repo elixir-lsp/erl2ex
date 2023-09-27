@@ -20,7 +20,7 @@ defmodule TypeTest do
       @typep private_type() :: integer()
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -48,7 +48,7 @@ defmodule TypeTest do
       @typep type6() :: float()
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -67,7 +67,7 @@ defmodule TypeTest do
       @typep type3() :: :"123"
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -89,7 +89,7 @@ defmodule TypeTest do
       @typep type4() :: -1..10
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -105,7 +105,7 @@ defmodule TypeTest do
       @typep type2() :: 42
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -133,7 +133,7 @@ defmodule TypeTest do
       @typep type6() :: []
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -155,7 +155,7 @@ defmodule TypeTest do
       @typep type4() :: {integer(), atom(), :hello}
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -183,7 +183,7 @@ defmodule TypeTest do
       @typep type6() :: <<_::10, _::_*8>>
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -205,7 +205,7 @@ defmodule TypeTest do
       @typep type4() :: (atom(), atom() -> integer())
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -224,7 +224,7 @@ defmodule TypeTest do
       @typep type3() :: %{atom() => integer()}
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -240,7 +240,7 @@ defmodule TypeTest do
       @typep type2() :: true | false | nil
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -262,7 +262,7 @@ defmodule TypeTest do
       @typep type2() :: record(:erlrecord_myrecord, field1: char_list(), field2: :undefined | tuple() | integer(), field3: term())
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -275,7 +275,7 @@ defmodule TypeTest do
       @typep type1(t) :: list(t) | {any()}
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -291,7 +291,7 @@ defmodule TypeTest do
       @typep type2() :: type1() | integer()
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -304,7 +304,7 @@ defmodule TypeTest do
       @typep type1() :: :supervisor.startchild_ret()
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -325,7 +325,7 @@ defmodule TypeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -344,7 +344,7 @@ defmodule TypeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -363,7 +363,7 @@ defmodule TypeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -382,7 +382,7 @@ defmodule TypeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -407,7 +407,7 @@ defmodule TypeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -426,7 +426,7 @@ defmodule TypeTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 

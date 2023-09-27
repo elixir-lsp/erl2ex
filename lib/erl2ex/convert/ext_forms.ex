@@ -1,11 +1,11 @@
 # Conversion logic for extended (epp_dodger) AST forms.
 
-defmodule Erl2ex.Convert.ExtForms do
+defmodule Erl2exVendored.Convert.ExtForms do
 
   @moduledoc false
 
 
-  alias Erl2ex.Pipeline.ExComment
+  alias Erl2exVendored.Pipeline.ExComment
 
 
   # A dispatching function that converts a form with a context. Returns a

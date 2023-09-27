@@ -4,7 +4,7 @@
 # If the given node matches what the function is expecting, it calls the given
 # function and returns its result; otherwise it returns the default.
 
-defmodule Erl2ex.Pipeline.ErlSyntax do
+defmodule Erl2exVendored.Pipeline.ErlSyntax do
 
   @moduledoc false
 

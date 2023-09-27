@@ -1,4 +1,4 @@
-defmodule Erl2ex.TestHelper do
+defmodule Erl2exVendored.TestHelper do
 
   @e2e_files_dir "tmp/e2e"
 
@@ -21,8 +21,8 @@ defmodule Erl2ex.TestHelper do
 
   def convert_dir(name, src_path, dest_path, opts \\ []) do
     File.mkdir_p!(project_path(name, dest_path))
-    results = Erl2ex.convert_dir(project_path(name, src_path), project_path(name, dest_path), opts)
-    Erl2ex.Results.throw_error(results)
+    results = Erl2exVendored.convert_dir(project_path(name, src_path), project_path(name, dest_path), opts)
+    Erl2exVendored.Results.throw_error(results)
   end
 
 
@@ -151,9 +151,9 @@ defmodule Erl2ex.TestHelper do
 
 
   def test_conversion(input, opts) do
-    output = Erl2ex.convert_str!(input, opts)
+    output = Erl2exVendored.convert_str!(input, opts)
     test_num = :erlang.unique_integer([:positive])
-    module = :"Elixir.Erl2ex.TestModule#{test_num}"
+    module = :"Elixir.Erl2exVendored.TestModule#{test_num}"
     module_name = module |> Module.split |> Enum.join(".")
     Code.eval_string "defmodule #{module_name} do\n#{output}\nend"
     %Result{output: output, module: module}

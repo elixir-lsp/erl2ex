@@ -3,7 +3,7 @@
 # generalized parser (epp_dodger). Both parsers have their strengths and
 # weaknesses, and we expect to use data from both sources.
 
-defmodule Erl2ex.Pipeline.Parse do
+defmodule Erl2exVendored.Pipeline.Parse do
 
   @moduledoc false
 

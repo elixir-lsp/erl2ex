@@ -3,14 +3,14 @@
 # how to call functions and macros, and so forth. It is passed down the
 # function tree during conversion and modified as needed.
 
-defmodule Erl2ex.Convert.Context do
+defmodule Erl2exVendored.Convert.Context do
 
   @moduledoc false
 
-  alias Erl2ex.Pipeline.Names
-  alias Erl2ex.Pipeline.Utils
+  alias Erl2exVendored.Pipeline.Names
+  alias Erl2exVendored.Pipeline.Utils
 
-  alias Erl2ex.Convert.Context
+  alias Erl2exVendored.Convert.Context
 
 
   defstruct(

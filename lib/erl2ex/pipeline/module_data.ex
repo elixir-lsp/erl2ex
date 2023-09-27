@@ -1,13 +1,13 @@
 # This data structure is the output of the analyze phase. It includes a bunch
 # of information about the module as a whole.
 
-defmodule Erl2ex.Pipeline.ModuleData do
+defmodule Erl2exVendored.Pipeline.ModuleData do
 
 
   @moduledoc false
 
-  alias Erl2ex.Pipeline.ModuleData
-  alias Erl2ex.Pipeline.Names
+  alias Erl2exVendored.Pipeline.ModuleData
+  alias Erl2exVendored.Pipeline.Names
 
 
   defstruct(

@@ -1,7 +1,7 @@
 defmodule PreprocessorTest do
   use ExUnit.Case
 
-  import Erl2ex.TestHelper
+  import Erl2exVendored.TestHelper
 
 
   @opts [emit_file_headers: false]
@@ -304,7 +304,7 @@ defmodule PreprocessorTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -327,7 +327,7 @@ defmodule PreprocessorTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -381,7 +381,7 @@ defmodule PreprocessorTest do
       @defined_debug false
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -435,7 +435,7 @@ defmodule PreprocessorTest do
       @defined_DEBUG false
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -466,7 +466,7 @@ defmodule PreprocessorTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -486,7 +486,7 @@ defmodule PreprocessorTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -506,7 +506,7 @@ defmodule PreprocessorTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, Keyword.merge(@opts, [define_prefix: "ERL_DEFINE_"])) == expected
+    assert Erl2exVendored.convert_str!(input, Keyword.merge(@opts, [define_prefix: "ERL_DEFINE_"])) == expected
   end
 
 
@@ -526,7 +526,7 @@ defmodule PreprocessorTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, Keyword.merge(@opts, [defines_from_config: "erl2ex", define_prefix: "ERL_DEFINE_"])) == expected
+    assert Erl2exVendored.convert_str!(input, Keyword.merge(@opts, [defines_from_config: "erl2ex", define_prefix: "ERL_DEFINE_"])) == expected
   end
 
 
@@ -550,7 +550,7 @@ defmodule PreprocessorTest do
       end
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -600,7 +600,7 @@ defmodule PreprocessorTest do
       # End included file: include3.hrl
       """
 
-    assert Erl2ex.convert_str!(input, Keyword.merge(@opts, [include_dir: "test/files"])) == expected
+    assert Erl2exVendored.convert_str!(input, Keyword.merge(@opts, [include_dir: "test/files"])) == expected
   end
 
 
@@ -609,7 +609,7 @@ defmodule PreprocessorTest do
       -include_lib("kernel/include/file.hrl").
       """
 
-    output = Erl2ex.convert_str!(input)
+    output = Erl2exVendored.convert_str!(input)
 
     assert String.contains?(output, "Record.defrecordp :erlrecord_file_info")
   end
@@ -636,7 +636,7 @@ defmodule PreprocessorTest do
       # End included file: test/files/include3.hrl
       """
 
-    assert Erl2ex.convert_str!(input, @opts) == expected
+    assert Erl2exVendored.convert_str!(input, @opts) == expected
   end
 
 
@@ -647,7 +647,7 @@ defmodule PreprocessorTest do
       -include_lib("$ERL2EX_LIBRARY_NAME/include/file.hrl").
       """
 
-    output = Erl2ex.convert_str!(input)
+    output = Erl2exVendored.convert_str!(input)
 
     assert String.contains?(output, "Record.defrecordp :erlrecord_file_info")
   end

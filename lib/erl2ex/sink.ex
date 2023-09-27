@@ -1,8 +1,8 @@
 
-defmodule Erl2ex.Sink do
+defmodule Erl2exVendored.Sink do
 
   @moduledoc """
-  Erl2ex.Sink is a process that consumes generated Elixir source, normally
+  Erl2exVendored.Sink is a process that consumes generated Elixir source, normally
   writing files to the file system.
   """
 
@@ -30,7 +30,7 @@ defmodule Erl2ex.Sink do
   Writes data to a sink, at the given path.
   """
 
-  @spec write(t, Erl2ex.file_id, String.t) :: :ok | {:error, term}
+  @spec write(t, Erl2exVendored.file_id, String.t) :: :ok | {:error, term}
 
   def write(sink, path, str) do
     GenServer.call(sink, {:write, path, str})
@@ -43,7 +43,7 @@ defmodule Erl2ex.Sink do
   Available only if the `allow_get` configuration is in effect.
   """
 
-  @spec get_string(t, Erl2ex.file_id) :: {:ok, String.t} | {:error, term}
+  @spec get_string(t, Erl2exVendored.file_id) :: {:ok, String.t} | {:error, term}
 
   def get_string(sink, path) do
     GenServer.call(sink, {:get_string, path})
@@ -54,7 +54,7 @@ defmodule Erl2ex.Sink do
   Returns whether the given file identifier has been written to.
   """
 
-  @spec path_written?(t, Erl2ex.file_id) :: boolean
+  @spec path_written?(t, Erl2exVendored.file_id) :: boolean
 
   def path_written?(sink, path) do
     GenServer.call(sink, {:path_written, path})

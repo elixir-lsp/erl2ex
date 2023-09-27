@@ -1,19 +1,19 @@
 
-defmodule Erl2ex.Results do
+defmodule Erl2exVendored.Results do
 
   @moduledoc """
-  Erl2ex.Results defines the structure of result data returned from most
-  functions in the Erl2ex module.
+  Erl2exVendored.Results defines the structure of result data returned from most
+  functions in the Erl2exVendored module.
   """
 
 
-  alias Erl2ex.Results
+  alias Erl2exVendored.Results
 
 
   defmodule File do
 
     @moduledoc """
-    Erl2ex.Results.File defines the result data structure for a particular file.
+    Erl2exVendored.Results.File defines the result data structure for a particular file.
     """
 
     defstruct(

@@ -2,7 +2,7 @@
 defmodule E2ETest do
   use ExUnit.Case
 
-  import Erl2ex.TestHelper
+  import Erl2exVendored.TestHelper
 
 
   # Libraries that are working

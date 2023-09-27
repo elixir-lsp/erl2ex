@@ -16,7 +16,7 @@ defmodule ErrorTest do
       description: "syntax error before: '.'"
     }
 
-    assert Erl2ex.convert_str(input, @opts) == {:error, expected}
+    assert Erl2exVendored.convert_str(input, @opts) == {:error, expected}
   end
 
 

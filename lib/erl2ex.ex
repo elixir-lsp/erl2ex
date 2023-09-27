@@ -1,27 +1,27 @@
 # Main entry points for erl2ex.
 
-defmodule Erl2ex do
+defmodule Erl2exVendored do
 
   @moduledoc """
-  Erl2ex is an Erlang to Elixir transpiler, converting well-formed Erlang
+  Erl2exVendored is an Erlang to Elixir transpiler, converting well-formed Erlang
   source to Elixir source with equivalent functionality.
 
   The goal is to produce correct, functioning Elixir code, but not necessarily
   perfectly idiomatic. This tool may be used as a starting point when porting
   code from Erlang to Elixir, but manual cleanup will likely be desired.
 
-  This module provides the main entry points into Erl2ex.
+  This module provides the main entry points into Erl2exVendored.
   """
 
-  alias Erl2ex.Results
-  alias Erl2ex.Sink
-  alias Erl2ex.Source
+  alias Erl2exVendored.Results
+  alias Erl2exVendored.Sink
+  alias Erl2exVendored.Source
 
-  alias Erl2ex.Pipeline.Analyze
-  alias Erl2ex.Pipeline.Codegen
-  alias Erl2ex.Pipeline.Convert
-  alias Erl2ex.Pipeline.InlineIncludes
-  alias Erl2ex.Pipeline.Parse
+  alias Erl2exVendored.Pipeline.Analyze
+  alias Erl2exVendored.Pipeline.Codegen
+  alias Erl2exVendored.Pipeline.Convert
+  alias Erl2exVendored.Pipeline.InlineIncludes
+  alias Erl2exVendored.Pipeline.Parse
 
 
   @typedoc """
@@ -200,7 +200,7 @@ defmodule Erl2ex do
   path. Writes the result to the given results collector. Returns :ok.
   """
 
-  @spec convert(Source.t, Sink.t, Results.Collector.t, Erl2ex.file_id, Erl2ex.file_id, options) :: :ok
+  @spec convert(Source.t, Sink.t, Results.Collector.t, Erl2exVendored.file_id, Erl2exVendored.file_id, options) :: :ok
 
   def convert(source, sink, results_collector, source_path, dest_path, opts \\ []) do
     {source_str, actual_source_path} = Source.read_source(source, source_path)

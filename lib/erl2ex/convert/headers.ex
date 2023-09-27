@@ -1,17 +1,17 @@
 # Logic to determine what should appear in the "header" of the Elixir module.
 
-defmodule Erl2ex.Convert.Headers do
+defmodule Erl2exVendored.Convert.Headers do
 
   @moduledoc false
 
 
-  alias Erl2ex.Pipeline.ExAttr
-  alias Erl2ex.Pipeline.ExClause
-  alias Erl2ex.Pipeline.ExFunc
-  alias Erl2ex.Pipeline.ExHeader
-  alias Erl2ex.Pipeline.ExMacro
+  alias Erl2exVendored.Pipeline.ExAttr
+  alias Erl2exVendored.Pipeline.ExClause
+  alias Erl2exVendored.Pipeline.ExFunc
+  alias Erl2exVendored.Pipeline.ExHeader
+  alias Erl2exVendored.Pipeline.ExMacro
 
-  alias Erl2ex.Pipeline.ModuleData
+  alias Erl2exVendored.Pipeline.ModuleData
 
 
   # Builds an ExHeader structure specifying what should go in the Elixir module

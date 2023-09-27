@@ -1,7 +1,7 @@
 # This module knows about things like reserved words and other special names,
 # and what names are allowed in what contexts.
 
-defmodule Erl2ex.Pipeline.Names do
+defmodule Erl2exVendored.Pipeline.Names do
 
   @moduledoc false
 

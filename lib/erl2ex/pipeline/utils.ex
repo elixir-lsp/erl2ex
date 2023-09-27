@@ -1,6 +1,6 @@
 # A set of internal utility functions.
 
-defmodule Erl2ex.Pipeline.Utils do
+defmodule Erl2exVendored.Pipeline.Utils do
 
   @moduledoc false
 

@@ -1,13 +1,13 @@
 
-defmodule Erl2ex.Results.Collector do
+defmodule Erl2exVendored.Results.Collector do
 
   @moduledoc """
-  Erl2ex.Results.Collector is a process that accumulates results of a
+  Erl2exVendored.Results.Collector is a process that accumulates results of a
   conversion run.
   """
 
 
-  alias Erl2ex.Results
+  alias Erl2exVendored.Results
 
 
   @typedoc """

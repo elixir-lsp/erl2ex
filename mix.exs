@@ -1,16 +1,16 @@
-defmodule Erl2ex.Mixfile do
+defmodule Erl2exVendored.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :erl2ex,
+      app: :erl2ex_vendored,
       version: "0.0.10",
       elixir: "~> 1.4",
-      name: "Erl2ex",
+      name: "Erl2exVendored",
       source_url: "https://github.com/dazuma/erl2ex",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
-      escript: [main_module: Erl2ex.Cli],
+      escript: [main_module: Erl2exVendored.Cli],
       deps: deps(),
       docs: docs(),
       description: description(),
@@ -38,7 +38,7 @@ defmodule Erl2ex.Mixfile do
 
   defp description do
     """
-    Erl2ex is an Erlang to Elixir transpiler, converting well-formed Erlang
+    Erl2exVendored is an Erlang to Elixir transpiler, converting well-formed Erlang
     source to Elixir source with equivalent functionality.
     """
   end

@@ -2,16 +2,16 @@
 # We analyze the parsed forms and gather a set of module-wide information
 # needed for later phases. The information is represented by ModuleData.
 
-defmodule Erl2ex.Pipeline.Analyze do
+defmodule Erl2exVendored.Pipeline.Analyze do
 
   @moduledoc false
 
-  alias Erl2ex.Pipeline.ErlSyntax
-  alias Erl2ex.Pipeline.ModuleData
-  alias Erl2ex.Pipeline.ModuleData.MacroData
-  alias Erl2ex.Pipeline.ModuleData.RecordData
-  alias Erl2ex.Pipeline.Names
-  alias Erl2ex.Pipeline.Utils
+  alias Erl2exVendored.Pipeline.ErlSyntax
+  alias Erl2exVendored.Pipeline.ModuleData
+  alias Erl2exVendored.Pipeline.ModuleData.MacroData
+  alias Erl2exVendored.Pipeline.ModuleData.RecordData
+  alias Erl2exVendored.Pipeline.Names
+  alias Erl2exVendored.Pipeline.Utils
 
 
   # Run all the analyses on the given list of forms, and return a ModuleData.

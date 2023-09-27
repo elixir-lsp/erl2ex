@@ -1,6 +1,6 @@
 # CLI implementation for erl2ex
 
-defmodule Erl2ex.Cli do
+defmodule Erl2exVendored.Cli do
 
   @moduledoc """
   This module provides the command line interface for the erl2ex binary and
@@ -8,7 +8,7 @@ defmodule Erl2ex.Cli do
   """
 
 
-  alias Erl2ex.Results
+  alias Erl2exVendored.Results
 
 
   @doc """
@@ -134,7 +134,7 @@ defmodule Erl2ex.Cli do
   defp run_conversion([], options) do
     :all
       |> IO.read
-      |> Erl2ex.convert_str!(options)
+      |> Erl2exVendored.convert_str!(options)
       |> IO.write
     0
   end
@@ -143,10 +143,10 @@ defmodule Erl2ex.Cli do
     output = Keyword.get(options, :output)
     cond do
       File.dir?(path) ->
-        result = Erl2ex.convert_dir(path, output, options)
+        result = Erl2exVendored.convert_dir(path, output, options)
         handle_result(result)
       File.regular?(path) ->
-        result = Erl2ex.convert_file(path, output, options)
+        result = Erl2exVendored.convert_file(path, output, options)
         handle_result(result)
       true ->
         IO.puts(:stderr, "Could not find input: #{path}")

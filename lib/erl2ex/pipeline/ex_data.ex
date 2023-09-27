@@ -4,7 +4,7 @@
 
 # A toplevel comment.
 
-defmodule Erl2ex.Pipeline.ExComment do
+defmodule Erl2exVendored.Pipeline.ExComment do
   @moduledoc false
 
   defstruct(
@@ -17,7 +17,7 @@ end
 
 # A module attribute.
 
-defmodule Erl2ex.Pipeline.ExAttr do
+defmodule Erl2exVendored.Pipeline.ExAttr do
   @moduledoc false
 
   defstruct(
@@ -38,7 +38,7 @@ end
 # This is represented as an abstract directive here, and codegen takes care
 # of generating Elixir compile-time code.
 
-defmodule Erl2ex.Pipeline.ExDirective do
+defmodule Erl2exVendored.Pipeline.ExDirective do
   @moduledoc false
 
   defstruct(
@@ -55,7 +55,7 @@ end
 
 # A directive to import a module.
 
-defmodule Erl2ex.Pipeline.ExImport do
+defmodule Erl2exVendored.Pipeline.ExImport do
   @moduledoc false
 
   defstruct(
@@ -72,7 +72,7 @@ end
 
 # An Elixir macro
 
-defmodule Erl2ex.Pipeline.ExMacro do
+defmodule Erl2exVendored.Pipeline.ExMacro do
   @moduledoc false
 
   defstruct(
@@ -104,7 +104,7 @@ end
 
 # An Elixir record.
 
-defmodule Erl2ex.Pipeline.ExRecord do
+defmodule Erl2exVendored.Pipeline.ExRecord do
   @moduledoc false
 
   defstruct(
@@ -125,7 +125,7 @@ end
 
 # An Elixir type definition.
 
-defmodule Erl2ex.Pipeline.ExType do
+defmodule Erl2exVendored.Pipeline.ExType do
   @moduledoc false
 
   defstruct(
@@ -144,7 +144,7 @@ end
 
 # An Elixir function spec.
 
-defmodule Erl2ex.Pipeline.ExSpec do
+defmodule Erl2exVendored.Pipeline.ExSpec do
   @moduledoc false
 
   defstruct(
@@ -165,7 +165,7 @@ end
 # require statements for Bitwise and Record, if needed, as well as various
 # macros, attributes, etc. needed to implement Erlang semantics.
 
-defmodule Erl2ex.Pipeline.ExHeader do
+defmodule Erl2exVendored.Pipeline.ExHeader do
   @moduledoc false
 
   defstruct(
@@ -192,7 +192,7 @@ end
 
 # An Elixir function.
 
-defmodule Erl2ex.Pipeline.ExFunc do
+defmodule Erl2exVendored.Pipeline.ExFunc do
   @moduledoc false
 
   defstruct(
@@ -216,7 +216,7 @@ end
 
 # A single clause of an Elixir function.
 
-defmodule Erl2ex.Pipeline.ExClause do
+defmodule Erl2exVendored.Pipeline.ExClause do
   @moduledoc false
 
   defstruct(
@@ -233,7 +233,7 @@ end
 
 # The full Elixir module representation.
 
-defmodule Erl2ex.Pipeline.ExModule do
+defmodule Erl2exVendored.Pipeline.ExModule do
   @moduledoc false
 
   defstruct(

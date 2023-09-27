@@ -1,13 +1,13 @@
 # Conversion functions for erlparse AST.
 
-defmodule Erl2ex.Convert.ErlExpressions do
+defmodule Erl2exVendored.Convert.ErlExpressions do
 
   @moduledoc false
 
-  alias Erl2ex.Convert.Context
+  alias Erl2exVendored.Convert.Context
 
-  alias Erl2ex.Pipeline.ModuleData
-  alias Erl2ex.Pipeline.Names
+  alias Erl2exVendored.Pipeline.ModuleData
+  alias Erl2exVendored.Pipeline.Names
 
 
   @import_kernel_metadata [context: Elixir, import: Kernel]

@@ -2,14 +2,14 @@
 # the parsed forms, looking for include and include_lib calls. Any included
 # files are parsed and its forms inlined into the form list.
 
-defmodule Erl2ex.Pipeline.InlineIncludes do
+defmodule Erl2exVendored.Pipeline.InlineIncludes do
 
   @moduledoc false
 
-  alias Erl2ex.Source
+  alias Erl2exVendored.Source
 
-  alias Erl2ex.Pipeline.ErlSyntax
-  alias Erl2ex.Pipeline.Parse
+  alias Erl2exVendored.Pipeline.ErlSyntax
+  alias Erl2exVendored.Pipeline.Parse
 
 
   # Entry point into InlineIncludes. Takes a list of forms, a Source
