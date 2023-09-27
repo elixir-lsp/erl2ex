@@ -19,7 +19,7 @@ defmodule Erl2ex.Mixfile do
   end
 
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :syntax_tools]]
   end
 
   defp deps do
