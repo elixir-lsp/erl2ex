@@ -56,9 +56,9 @@ defmodule StructureTest do
 
 
       defp foo() do
-        a = erlrecord_foo(field1: 'Ada')
+        a = erlrecord_foo(field1: ~c"Ada")
         b = erlrecord_foo(a, field2: 234)
-        c = erlrecord_foo(field1: 'Lovelace', field2: 345)
+        c = erlrecord_foo(field1: ~c"Lovelace", field2: 345)
         erlrecord_foo(field1: d) = b
         erlrecord_foo(b, :field2)
       end

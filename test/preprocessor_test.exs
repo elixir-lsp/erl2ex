@@ -262,7 +262,7 @@ defmodule PreprocessorTest do
 
 
       defp str_x() do
-        'hi'
+        ~c"hi"
       end
 
 
@@ -543,10 +543,10 @@ defmodule PreprocessorTest do
     expected = """
       defp foo() do
         __MODULE__
-        Atom.to_charlist(__MODULE__)
-        String.to_charlist(__ENV__.file())
+        Atom.to_char_list(__MODULE__)
+        String.to_char_list(__ENV__.file())
         __ENV__.line()
-        'BEAM'
+        ~c"BEAM"
       end
       """
 
