@@ -262,7 +262,7 @@ defmodule Erl2ex.Convert.ErlForms do
 
     {ex_args, context} = ErlExpressions.conv_expr(args, context)
     {ex_result, context} = ErlExpressions.conv_expr(result, context)
-    ex_expr = {:::, [], [{name, [], ex_args}, ex_result]}
+    ex_expr = {:"::", [], [{name, [], ex_args}, ex_result]}
 
     ex_constraints = Enum.map(constraints, &(conv_spec_constraint(context, name, &1)))
     ex_constraints = context

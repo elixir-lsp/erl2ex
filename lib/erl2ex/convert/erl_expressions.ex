@@ -248,14 +248,14 @@ defmodule Erl2ex.Convert.ErlExpressions do
   def conv_expr({:bin_element, _, val, size, :default}, context) do
     {ex_val, context} = bin_element_expr(val, context)
     {ex_size, context} = bin_element_size(size, false, context)
-    {{:::, [], [ex_val, ex_size]}, context}
+    {{:"::", [], [ex_val, ex_size]}, context}
   end
 
   def conv_expr({:bin_element, _, val, size, modifiers}, context) do
     {ex_val, context} = bin_element_expr(val, context)
     {ex_size, context} = bin_element_size(size, true, context)
     {ex_modifiers, context} = bin_element_modifier_list(modifiers, ex_size, context)
-    {{:::, [], [ex_val, ex_modifiers]}, context}
+    {{:"::", [], [ex_val, ex_modifiers]}, context}
   end
 
   def conv_expr({:record, _, name, fields}, context) do
@@ -602,18 +602,18 @@ defmodule Erl2ex.Convert.ErlExpressions do
 
   defp conv_type(:binary, [m, {:integer, _, 0}], context) do
     {ex_m, context} = conv_expr(m, context)
-    {{:<<>>, [], [{:::, [], [{:_, [], Elixir}, ex_m]}]}, context}
+    {{:<<>>, [], [{:"::", [], [{:_, [], Elixir}, ex_m]}]}, context}
   end
 
   defp conv_type(:binary, [{:integer, _, 0}, n], context) do
     {ex_n, context} = conv_expr(n, context)
-    {{:<<>>, [], [{:::, [], [{:_, [], Elixir}, {:*, @import_kernel_metadata, [{:_, [], Elixir}, ex_n]}]}]}, context}
+    {{:<<>>, [], [{:"::", [], [{:_, [], Elixir}, {:*, @import_kernel_metadata, [{:_, [], Elixir}, ex_n]}]}]}, context}
   end
 
   defp conv_type(:binary, [m, n], context) do
     {ex_m, context} = conv_expr(m, context)
     {ex_n, context} = conv_expr(n, context)
-    {{:<<>>, [], [{:::, [], [{:_, [], Elixir}, ex_m]}, {:::, [], [{:_, [], Elixir}, {:*, @import_kernel_metadata, [{:_, [], Elixir}, ex_n]}]}]}, context}
+    {{:<<>>, [], [{:"::", [], [{:_, [], Elixir}, ex_m]}, {:"::", [], [{:_, [], Elixir}, {:*, @import_kernel_metadata, [{:_, [], Elixir}, ex_n]}]}]}, context}
   end
 
   defp conv_type(:fun, [args, result], context) do
