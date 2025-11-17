@@ -7,7 +7,7 @@ defmodule Erl2exVendored.Mixfile do
       version: "0.0.10",
       elixir: "~> 1.4",
       name: "Erl2exVendored",
-      source_url: "https://github.com/dazuma/erl2ex",
+      source_url: "https://github.com/elixir-lsp/erl2ex",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       escript: [main_module: Erl2exVendored.Cli],
@@ -46,9 +46,9 @@ defmodule Erl2exVendored.Mixfile do
   defp package do
     [
       files: ["lib", "mix.exs", "README.md", "LICENSE.md", "CHANGELOG.md"],
-      maintainers: ["Daniel Azuma"],
+      maintainers: ["Łukasz Samson"],
       licenses: ["BSD"],
-      links: %{"GitHub" => "https://github.com/dazuma/erl2ex"}
+      links: %{"GitHub" => "https://github.com/elixir-lsp/erl2ex"}
     ]
   end
 end

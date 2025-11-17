@@ -76,7 +76,7 @@ This software is still under heavy development, and many capabilities are not ye
 
 While we appreciate contributions, please note that this software is currently highly experimental, and the code is evolving very rapidly. It is recommended to contact the author before embarking on a major pull request. More detailed contribution guidelines will be provided when the software stabilizes further.
 
-The source can be found on Github at [https://github.com/dazuma/erl2ex](https://github.com/dazuma/erl2ex)
+The source can be found on Github at [https://github.com/elixir-lsp/erl2ex](https://github.com/elixir-lsp/erl2ex)
 
 ## License
 
