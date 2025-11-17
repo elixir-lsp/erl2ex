@@ -140,7 +140,7 @@ defmodule Erl2exVendored do
     sink = Sink.start_link(dest_dir: cur_dir)
     results_collector = Results.Collector.start_link()
     try do
-      convert(source, sink, source_path, dest_path, opts)
+      convert(source, sink, results_collector, source_path, dest_path, opts)
       if Keyword.get(opts, :verbosity, 0) > 0 do
         IO.puts(:stderr, "Converted #{source_path} -> #{dest_path}")
       end

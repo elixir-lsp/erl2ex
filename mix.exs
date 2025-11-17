@@ -14,7 +14,11 @@ defmodule Erl2exVendored.Mixfile do
       deps: deps(),
       docs: docs(),
       description: description(),
-      package: package()
+      package: package(),
+      prune_code_paths: false,
+      dialyzer: [
+        ignore_warnings: ".dialyzer_ignore.exs"
+      ]
     ]
   end
 
@@ -26,7 +30,8 @@ defmodule Erl2exVendored.Mixfile do
     [
       {:earmark, "~> 1.0", only: :dev},
       {:ex_doc, "~> 0.13", only: :dev},
-      {:credo, "~> 0.4", only: :dev}
+      {:credo, "~> 0.4", only: :dev},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
     ]
   end
 

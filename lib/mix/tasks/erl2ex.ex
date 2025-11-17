@@ -8,7 +8,8 @@ defmodule Mix.Tasks.Erl2exVendored do
 
   use Mix.Task
 
-
+  @impl true
+  @spec run(OptionParser.argv) :: no_return
   def run(args) do
     Erl2exVendored.Cli.main(args)
   end

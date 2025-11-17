@@ -132,8 +132,8 @@ defmodule Erl2exVendored.Cli do
 
 
   defp run_conversion([], options) do
-    :all
-      |> IO.read
+    :stdio
+      |> IO.read(:eof)
       |> Erl2exVendored.convert_str!(options)
       |> IO.write
     0

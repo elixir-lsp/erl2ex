@@ -198,21 +198,14 @@ defmodule Erl2exVendored.Pipeline.Parse do
 
   # Entry point for this parser. Takes a charlist and returns a list of trees.
 
-  defp parse_ext_forms(charlist, opts) do
+  defp parse_ext_forms(charlist, _opts) do
     comments = :erl_comment_scan.string(charlist)
     {:ok, io} = charlist
       |> preprocess_charlist_for_ext
       |> List.to_string
       |> StringIO.open
-    case :epp_dodger.parse(io) do
-      {:ok, forms} ->
-        reconcile_comments(forms, comments)
-      {:error, {line, _, desc}} ->
-        raise CompileError,
-          file: Keyword.get(opts, :cur_file_path, "(unknown source file)"),
-          line: line,
-          description: desc
-    end
+    {:ok, forms} = :epp_dodger.parse(io)
+    reconcile_comments(forms, comments)
   end
 
 

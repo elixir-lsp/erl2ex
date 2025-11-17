@@ -423,6 +423,8 @@ defmodule Erl2exVendored.Convert.Context do
 
   # Report an error for an unrecognized Erlang expression.
 
+  @spec handle_error(any, any) :: no_return
+  @spec handle_error(any, any, String.t | nil) :: no_return
   def handle_error(context, expr, ast_context \\ nil) do
     ast_context = if ast_context, do: " #{ast_context}", else: ""
     raise CompileError,

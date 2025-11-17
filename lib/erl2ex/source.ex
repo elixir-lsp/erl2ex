@@ -185,7 +185,7 @@ defmodule Erl2exVendored.Source do
       {:ok, data} when is_binary(data) ->
         {:ok, data, path}
       {:ok, io} when is_pid(io) ->
-        data = io |> IO.read(:all) |> IO.chardata_to_string
+        data = io |> IO.read(:eof) |> IO.chardata_to_string
         {:ok, data, path}
       :error ->
         Enum.find_value(search_dirs, {:error, :not_found, path}, fn dir ->
