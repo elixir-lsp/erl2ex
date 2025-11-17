@@ -7,6 +7,10 @@ defmodule Erl2exVendored.Pipeline.Parse do
 
   @moduledoc false
 
+  # Keywords like "else" are reserved in Erlang yet may appear in data
+  # structures, so we rewrite them to ordinary atoms for erl_parse.
+  @keyword_atom_literals [:else]
+
 
   # Takes a string as input, and returns the forms in the file as a list
   # of {erlparse_form, epp_dodger_form} tuples.
@@ -84,6 +88,10 @@ defmodule Erl2exVendored.Pipeline.Parse do
     preprocess_tokens_for_erl(tail, [{:var, line, :"?#{name}"} | result])
   defp preprocess_tokens_for_erl([{:"?", _}, {:var, line, name} | tail], result), do:
     preprocess_tokens_for_erl(tail, [{:var, line, :"?#{name}"} | result])
+  defp preprocess_tokens_for_erl([{keyword, line} | tail], result)
+  when keyword in @keyword_atom_literals do
+    preprocess_tokens_for_erl(tail, [{:atom, line, keyword} | result])
+  end
   defp preprocess_tokens_for_erl([{:comment, _, _} | tail], result), do:
     preprocess_tokens_for_erl(tail, result)
   defp preprocess_tokens_for_erl([tok | tail], result), do:
@@ -109,14 +117,17 @@ defmodule Erl2exVendored.Pipeline.Parse do
 
   # This clause handles other directives that take no argument (like endif) and
   # creates a pseudo attribute node.
-  defp parse_erl_form([{:-, line}, {:atom, _, directive}, {:dot, _}], _opts) do
-    {:attribute, line, directive}
+  defp parse_erl_form([{:-, line}, directive_token, {:dot, _}], _opts) do
+    {:attribute, line, directive_from_token(directive_token)}
   end
 
   # This clause handles any other form by passing it to erl_parse.
   defp parse_erl_form(form_tokens, opts) do
     form_tokens |> :erl_parse.parse_form |> handle_erl_parse_result(opts)
   end
+
+  defp directive_from_token({:atom, _, directive}), do: directive
+  defp directive_from_token({directive, _}) when is_atom(directive), do: directive
 
 
   # Parser for define directives. We have to handle some of the parsing
@@ -232,6 +243,10 @@ defmodule Erl2exVendored.Pipeline.Parse do
   defp preprocess_tokens_for_ext([{:"?", _}, {:"?", _}, {type, line, name} | tail], result)
   when type == :atom or type == :var do
     preprocess_tokens_for_ext(tail, [{:atom, line, :"??#{name}"}, {:"?", line} | result])
+  end
+  defp preprocess_tokens_for_ext([{keyword, line} | tail], result)
+  when keyword in @keyword_atom_literals do
+    preprocess_tokens_for_ext(tail, [{:atom, line, keyword} | result])
   end
   defp preprocess_tokens_for_ext([tok | tail], result), do:
     preprocess_tokens_for_ext(tail, [tok | result])
