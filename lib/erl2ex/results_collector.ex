@@ -110,7 +110,7 @@ defmodule Erl2exVendored.Results.Collector do
   end
 
 
-  def handle_call({:success, input_path, output_path}, _from, state) do
+  def handle_call({:success, input_path, output_path}, _from, state = %State{}) do
     if not state.allow_overwrite and Map.has_key?(state.data, input_path) do
       {:reply, {:error, :file_exists}, state}
     else
@@ -118,12 +118,12 @@ defmodule Erl2exVendored.Results.Collector do
         input_path: input_path,
         output_path: output_path
       }
-      state = %State{state | data: Map.put(state.data, input_path, file)}
+      state = %{state | data: Map.put(state.data, input_path, file)}
       {:reply, :ok, state}
     end
   end
 
-  def handle_call({:error, input_path, error}, _from, state) do
+  def handle_call({:error, input_path, error}, _from, state = %State{}) do
     if not state.allow_overwrite and Map.has_key?(state.data, input_path) do
       {:reply, {:error, :file_exists}, state}
     else
@@ -131,7 +131,7 @@ defmodule Erl2exVendored.Results.Collector do
         input_path: input_path,
         error: error
       }
-      state = %State{state | data: Map.put(state.data, input_path, file)}
+      state = %{state | data: Map.put(state.data, input_path, file)}
       {:reply, :ok, state}
     end
   end

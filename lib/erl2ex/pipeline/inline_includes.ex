@@ -63,8 +63,8 @@ defmodule Erl2exVendored.Pipeline.InlineIncludes do
     include_forms = include_str
       |> Parse.string(cur_file_path: include_path)
       |> process(source, main_source_path)
-    pre_comment = :erl_syntax.comment(['% Begin included file: #{display_path}'])
-    post_comment = :erl_syntax.comment(['% End included file: #{display_path}'])
+    pre_comment = :erl_syntax.comment([~c'% Begin included file: #{display_path}'])
+    post_comment = :erl_syntax.comment([~c'% End included file: #{display_path}'])
     [{nil, pre_comment} | include_forms] ++ [{nil, post_comment}]
   end
 

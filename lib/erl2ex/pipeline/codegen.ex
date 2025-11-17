@@ -76,12 +76,12 @@ defmodule Erl2exVendored.Pipeline.Codegen do
 
   # Update the indent level.
 
-  def increment_indent(context) do
-    %Context{context | indent: context.indent + 1}
+  def increment_indent(context = %Context{}) do
+    %{context | indent: context.indent + 1}
   end
 
-  def decrement_indent(context) do
-    %Context{context | indent: context.indent - 1}
+  def decrement_indent(context = %Context{}) do
+    %{context | indent: context.indent - 1}
   end
 
 
@@ -453,12 +453,12 @@ defmodule Erl2exVendored.Pipeline.Codegen do
 
   # Inserts appropriate vertical whitespace, given a form type.
 
-  defp skip_lines(context, cur_form, io) do
+  defp skip_lines(context = %Context{}, cur_form, io) do
     lines = calc_skip_lines(context.last_form, cur_form)
     if lines > 0 do
       IO.puts(io, String.duplicate("\n", lines - 1))
     end
-    %Context{context | last_form: cur_form}
+    %{context | last_form: cur_form}
   end
 
 

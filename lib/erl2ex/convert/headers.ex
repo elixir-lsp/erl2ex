@@ -18,9 +18,9 @@ defmodule Erl2exVendored.Convert.Headers do
   # header.
 
   def build_header(module_data, forms) do
-    header = forms
+    header = %ExHeader{} = forms
       |> Enum.reduce(%ExHeader{}, &header_check_form/2)
-    %ExHeader{header |
+    %{header |
       records: ModuleData.map_records(module_data, fn(name, fields) -> {name, fields} end),
       has_is_record: module_data.has_is_record,
       init_macros: ModuleData.macros_that_need_init(module_data),
@@ -52,11 +52,11 @@ defmodule Erl2exVendored.Convert.Headers do
   defp header_check_expr(expr, header) when is_tuple(expr) and tuple_size(expr) == 2, do:
     header_check_expr(elem(expr, 1), header)
 
-  defp header_check_expr(expr, header) when is_tuple(expr) and tuple_size(expr) >= 3 do
+  defp header_check_expr(expr, header = %ExHeader{}) when is_tuple(expr) and tuple_size(expr) >= 3 do
     imported = expr |> elem(1) |> Keyword.get(:import, nil)
     header =
       if imported == Bitwise do
-        %ExHeader{header | use_bitwise: true}
+        %{header | use_bitwise: true}
       else
         header
       end

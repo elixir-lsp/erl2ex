@@ -95,7 +95,7 @@ defmodule Erl2exVendored.Sink do
   end
 
 
-  def handle_call({:write, path, str}, _from, state) do
+  def handle_call({:write, path, str}, _from, state = %State{}) do
     if not state.allow_overwrite and Map.has_key?(state.data, path) do
       {:reply, {:error, :file_exists}, state}
     else
@@ -105,7 +105,7 @@ defmodule Erl2exVendored.Sink do
         end)
       end
       str = if state.allow_get, do: str, else: nil
-      state = %State{state | data: Map.put(state.data, path, str)}
+      state = %{state | data: Map.put(state.data, path, str)}
       {:reply, :ok, state}
     end
   end

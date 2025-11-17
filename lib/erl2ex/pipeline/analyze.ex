@@ -61,30 +61,30 @@ defmodule Erl2exVendored.Pipeline.Analyze do
   # An analysis of the extended (epp_dodger) AST that extracts the module
   # name, exports, and imports.
 
-  defp handle_form_for_name_and_exports({_erl_ast, form_node}, module_data) do
+  defp handle_form_for_name_and_exports({_erl_ast, form_node}, module_data = %ModuleData{}) do
     ErlSyntax.on_static_attribute(form_node, module_data, fn attr_name, arg_nodes ->
       case attr_name do
         :module ->
           ErlSyntax.on_trees1(arg_nodes, module_data, fn arg_node ->
             ErlSyntax.on_atom(arg_node, module_data, fn value ->
-              %ModuleData{module_data | name: value}
+              %{module_data | name: value}
             end)
           end)
         :export ->
           ErlSyntax.on_trees1(arg_nodes, module_data, fn arg_node ->
-            ErlSyntax.on_arity_qualifier_list(arg_node, module_data, fn(mod_data, name, arity) ->
+            ErlSyntax.on_arity_qualifier_list(arg_node, module_data, fn(mod_data = %ModuleData{}, name, arity) ->
               exports = mod_data.exports
                 |> MapSet.put({name, arity})
                 |> MapSet.put(name)
-              %ModuleData{mod_data |
+              %{mod_data |
                 exports: exports
               }
             end)
           end)
         :export_type ->
           ErlSyntax.on_trees1(arg_nodes, module_data, fn arg_node ->
-            ErlSyntax.on_type_with_arity_list(arg_node, module_data, fn(mod_data, name, arity) ->
-              %ModuleData{mod_data |
+            ErlSyntax.on_type_with_arity_list(arg_node, module_data, fn(mod_data = %ModuleData{}, name, arity) ->
+              %{mod_data |
                 type_exports: MapSet.put(mod_data.type_exports, {name, arity})
               }
             end)
@@ -93,11 +93,11 @@ defmodule Erl2exVendored.Pipeline.Analyze do
           if Enum.count(arg_nodes) == 2 do
             [module_name_node, func_nodes] = arg_nodes
             ErlSyntax.on_atom(module_name_node, module_data, fn module_name ->
-              ErlSyntax.on_arity_qualifier_list(func_nodes, module_data, fn(mod_data, name, arity) ->
+              ErlSyntax.on_arity_qualifier_list(func_nodes, module_data, fn(mod_data = %ModuleData{}, name, arity) ->
                 arity_map = mod_data.imported_funcs
                   |> Map.get(name, %{})
                   |> Map.put(arity, module_name)
-                %ModuleData{mod_data |
+                %{mod_data |
                   imported_funcs: Map.put(mod_data.imported_funcs, name, arity_map),
                   used_func_names: MapSet.put(mod_data.used_func_names, name)
                 }
@@ -116,12 +116,12 @@ defmodule Erl2exVendored.Pipeline.Analyze do
   # An analysis of the extended (epp_dodger) AST that extracts the names of
   # attributes defined in the module.
 
-  defp handle_form_for_used_attr_names({_erl_ast, form_node}, module_data) do
+  defp handle_form_for_used_attr_names({_erl_ast, form_node}, module_data = %ModuleData{}) do
     ErlSyntax.on_static_attribute(form_node, module_data, fn attr_name, _arg_nodes ->
       if Names.special_attr_name?(attr_name) do
         module_data
       else
-        %ModuleData{module_data |
+        %{module_data |
           used_attr_names: MapSet.put(module_data.used_attr_names, attr_name)
         }
       end
@@ -143,12 +143,12 @@ defmodule Erl2exVendored.Pipeline.Analyze do
   # Any local_funcs not already in func_rename_map need to have new names
   # assigned.
 
-  defp handle_form_for_funcs({_erl_ast, form_node}, module_data) do
+  defp handle_form_for_funcs({_erl_ast, form_node}, module_data = %ModuleData{}) do
     ErlSyntax.on_type(form_node, :function, module_data, fn ->
       arity = :erl_syntax.function_arity(form_node)
       name_node = :erl_syntax.function_name(form_node)
       ErlSyntax.on_atom(name_node, module_data, fn name ->
-        module_data = %ModuleData{module_data |
+        module_data = %{module_data |
           local_funcs: MapSet.put(module_data.local_funcs, {name, arity})
         }
         func_rename_map = module_data.func_rename_map
@@ -173,7 +173,7 @@ defmodule Erl2exVendored.Pipeline.Analyze do
   # strictly after the function name analysis, so that we have a complete list
   # of which names are already taken by exported functions.
 
-  defp assign_local_func_names(module_data) do
+  defp assign_local_func_names(module_data = %ModuleData{}) do
     module_data.local_funcs
       |> Enum.reduce(module_data, fn({name, _arity}, cur_data) ->
         func_rename_map = cur_data.func_rename_map
@@ -185,7 +185,7 @@ defmodule Erl2exVendored.Pipeline.Analyze do
           mangled_name = Utils.find_available_name(mangled_name, used_func_names, "func")
           func_rename_map = Map.put(func_rename_map, name, mangled_name)
           used_func_names = MapSet.put(used_func_names, mangled_name)
-          %ModuleData{module_data |
+          %{module_data |
             func_rename_map: func_rename_map,
             used_func_names: used_func_names
           }
@@ -205,7 +205,7 @@ defmodule Erl2exVendored.Pipeline.Analyze do
   # record queries so we can determine whether to emit code to support them.
 
   defp handle_form_for_records(
-    {{:attribute, _line, :record, {recname, fields}}, _form_node}, module_data)
+    {{:attribute, _line, :record, {recname, fields}}, _form_node}, module_data = %ModuleData{})
   do
     macro_name = Utils.find_available_name(
         recname, module_data.used_func_names, "erlrecord")
@@ -217,7 +217,7 @@ defmodule Erl2exVendored.Pipeline.Analyze do
       data_attr_name: data_name,
       fields: field_info
     }
-    %ModuleData{module_data |
+    %{module_data |
       records: Map.put(module_data.records, recname, record_info),
       used_func_names: MapSet.put(module_data.used_func_names, macro_name),
       used_attr_names: MapSet.put(module_data.used_attr_names, data_name)
@@ -257,8 +257,8 @@ defmodule Erl2exVendored.Pipeline.Analyze do
   # Look for record_info and record_index expressions in the erl_parse AST,
   # and, if found, allocate a name for the corresponding Elixir macros.
 
-  defp detect_record_query_presence({:call, _, {:atom, _, :is_record}, _}, module_data), do:
-    %ModuleData{module_data | has_is_record: true}
+  defp detect_record_query_presence({:call, _, {:atom, _, :is_record}, _}, module_data = %ModuleData{}), do:
+    %{module_data | has_is_record: true}
   defp detect_record_query_presence(
     {:call, _, {:atom, _, :record_info}, [{:atom, _, :size}, _]}, module_data)
   do
@@ -309,9 +309,9 @@ defmodule Erl2exVendored.Pipeline.Analyze do
     {{:define, _line, macro, replacement}, _form_node}, module_data)
   do
     {name, args} = interpret_macro_expr(macro)
-    macro = Map.get(module_data.macros, name, %MacroData{})
+    macro = %MacroData{} = Map.get(module_data.macros, name, %MacroData{})
     requires_init = update_requires_init(macro.requires_init, false)
-    macro = %MacroData{macro | requires_init: requires_init}
+    macro = %{macro | requires_init: requires_init}
     next_is_redefined = update_is_redefined(macro.is_redefined, args)
     module_data = update_macro_info(macro, next_is_redefined, args, name, replacement, module_data)
     detect_func_style_call(replacement, module_data)
@@ -320,18 +320,18 @@ defmodule Erl2exVendored.Pipeline.Analyze do
   # When we encounter a macro defintion directive, update our information about
   # whether definition state needs to be tracked.
   defp handle_form_for_macros(
-    {{:attribute, _line, directive, name}, _form_node}, module_data)
+    {{:attribute, _line, directive, name}, _form_node}, module_data = %ModuleData{})
   when directive == :ifdef or directive == :ifndef or directive == :undef
   do
     name = interpret_macro_name(name)
-    macro = Map.get(module_data.macros, name, %MacroData{})
+    macro = %MacroData{} = Map.get(module_data.macros, name, %MacroData{})
     if macro.define_tracker == nil do
       tracker_name = Utils.find_available_name(name, module_data.used_attr_names, "defined")
-      macro = %MacroData{macro |
+      macro = %{macro |
         define_tracker: tracker_name,
         requires_init: update_requires_init(macro.requires_init, true)
       }
-      %ModuleData{module_data |
+      %{module_data |
         macros: Map.put(module_data.macros, name, macro),
         used_attr_names: MapSet.put(module_data.used_attr_names, tracker_name)
       }
@@ -386,8 +386,8 @@ defmodule Erl2exVendored.Pipeline.Analyze do
   do
     case Atom.to_string(name) do
       << "?" :: utf8, basename :: binary >> ->
-        macro = Map.get(macros, String.to_atom(basename), %MacroData{})
-        macro = %MacroData{macro | has_func_style_call: true}
+        macro = %MacroData{} = Map.get(macros, String.to_atom(basename), %MacroData{})
+        macro = %{macro | has_func_style_call: true}
         {macro_dispatcher, used_func_names} =
           if macro_dispatcher == nil and macro.func_name == nil do
             macro_dispatcher2 = Utils.find_available_name("erlmacro", used_func_names)

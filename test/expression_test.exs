@@ -21,7 +21,7 @@ defmodule ExpressionTest do
 
     result = test_conversion(input, @opts)
     assert result.output == expected
-    assert apply(result.module, :foo, [:x]) == [:atom, 123, 3.14, {:x, {}, {:hello, 'world'}}, [1, [], 2]]
+    assert apply(result.module, :foo, [:x]) == [:atom, 123, 3.14, {:x, {}, {:hello, ~c'world'}}, [1, [], 2]]
   end
 
 

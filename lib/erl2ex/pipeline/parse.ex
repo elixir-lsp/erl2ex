@@ -260,15 +260,15 @@ defmodule Erl2exVendored.Pipeline.Parse do
       |> elem(0)
   end
 
-  defp unscan_token({:atom, _, a}), do: :io_lib.write_atom(a) ++ ' '
-  defp unscan_token({:string, _, s}), do: :io_lib.write_string(s) ++ ' '
-  defp unscan_token({:char, _, c}), do: :io_lib.write_char(c) ++ ' '
-  defp unscan_token({:float, _, f}), do: :erlang.float_to_list(f) ++ ' '
-  defp unscan_token({:integer, _, n}), do: :erlang.integer_to_list(n) ++ ' '
-  defp unscan_token({:var, _, a}), do: :erlang.atom_to_list(a) ++ ' '
-  defp unscan_token({:dot, _}), do: '. '
-  defp unscan_token({:., _}), do: '.'
-  defp unscan_token({a, _}), do: :erlang.atom_to_list(a) ++ ' '
+  defp unscan_token({:atom, _, a}), do: :io_lib.write_atom(a) ++ ~c' '
+  defp unscan_token({:string, _, s}), do: :io_lib.write_string(s) ++ ~c' '
+  defp unscan_token({:char, _, c}), do: :io_lib.write_char(c) ++ ~c' '
+  defp unscan_token({:float, _, f}), do: :erlang.float_to_list(f) ++ ~c' '
+  defp unscan_token({:integer, _, n}), do: :erlang.integer_to_list(n) ++ ~c' '
+  defp unscan_token({:var, _, a}), do: :erlang.atom_to_list(a) ++ ~c' '
+  defp unscan_token({:dot, _}), do: ~c'. '
+  defp unscan_token({:., _}), do: ~c'.'
+  defp unscan_token({a, _}), do: :erlang.atom_to_list(a) ++ ~c' '
 
   defp generate_newlines(0), do: []
   defp generate_newlines(i), do: [?\n | generate_newlines(i - 1)]

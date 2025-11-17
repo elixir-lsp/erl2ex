@@ -90,12 +90,12 @@ defmodule Erl2exVendored.Convert.Context do
   # present if this is a macro definition, and is a list of the argument
   # names as atoms.
 
-  def set_variable_maps(context, expr, macro_args \\ []) do
+  def set_variable_maps(context = %Context{}, expr, macro_args \\ []) do
     {variable_map, stringification_map} = compute_var_maps(context, expr, macro_args)
 
     quoted_vars = macro_args
       |> Enum.map(&(Map.fetch!(variable_map, &1)))
-    %Context{context |
+    %{context |
       quoted_variables: quoted_vars ++ Map.values(stringification_map),
       variable_map: variable_map,
       stringification_map: stringification_map
@@ -105,8 +105,8 @@ defmodule Erl2exVendored.Convert.Context do
 
   # Reset the local variable info when exiting a form definition.
 
-  def clear_variable_maps(context) do
-    %Context{context |
+  def clear_variable_maps(context = %Context{}) do
+    %{context |
       quoted_variables: [],
       variable_map: %{},
       stringification_map: %{}
@@ -122,10 +122,10 @@ defmodule Erl2exVendored.Convert.Context do
   # Begin collecting info on variables that the current macro exports. You
   # must pass in the list of arguments of the macro.
 
-  def start_macro_export_collection(context, args) do
+  def start_macro_export_collection(context = %Context{}, args) do
     index_map = args |> Enum.with_index |> Enum.into(%{})
     collector = {MapSet.new, index_map}
-    %Context{context |
+    %{context |
       macro_export_collection_stack: [collector | context.macro_export_collection_stack]
     }
   end
@@ -134,8 +134,8 @@ defmodule Erl2exVendored.Convert.Context do
   # Suspend collection of exported variables for the macro, due to an internal
   # macro or function call.
 
-  def suspend_macro_export_collection(context) do
-    %Context{context |
+  def suspend_macro_export_collection(context = %Context{}) do
+    %{context |
       macro_export_collection_stack: [{MapSet.new, nil} | context.macro_export_collection_stack]
     }
   end
@@ -143,8 +143,8 @@ defmodule Erl2exVendored.Convert.Context do
 
   # Resume collection of exported variables for the macro, after suspension.
 
-  def resume_macro_export_collection(context) do
-    %Context{context |
+  def resume_macro_export_collection(context = %Context{}) do
+    %{context |
       macro_export_collection_stack: tl(context.macro_export_collection_stack)
     }
   end
@@ -152,10 +152,10 @@ defmodule Erl2exVendored.Convert.Context do
 
   # Finish collecting macro export information, and set it for the given macro.
 
-  def finish_macro_export_collection(context, name, arity) do
+  def finish_macro_export_collection(context = %Context{}, name, arity) do
     [{indexes, _} | macro_export_collection_stack] = context.macro_export_collection_stack
     macro_exports = context.macro_exports |> Map.put({name, arity}, indexes)
-    %Context{context |
+    %{context |
       macro_exports: macro_exports,
       macro_export_collection_stack: macro_export_collection_stack
     }
@@ -165,14 +165,14 @@ defmodule Erl2exVendored.Convert.Context do
   # Add a variable that may be exported from the current macro. It is exported
   # if it is present in the macro args.
 
-  def add_macro_export(context, erl_var) do
+  def add_macro_export(context = %Context{}, erl_var) do
     case context.macro_export_collection_stack do
       [{_indexes, nil} | _tail] ->
         context
       [{indexes, index_map} | stack_tail] ->
         case Map.fetch(index_map, erl_var) do
           {:ok, index} ->
-            %Context{context |
+            %{context |
               macro_export_collection_stack: [{MapSet.put(indexes, index), index_map} | stack_tail]
             }
           :error ->
@@ -236,15 +236,15 @@ defmodule Erl2exVendored.Convert.Context do
 
   # Begin processing a type expression.
 
-  def set_type_expr_mode(context) do
-    %Context{context | in_type_expr: true, in_eager_macro_replacement: true}
+  def set_type_expr_mode(context = %Context{}) do
+    %{context | in_type_expr: true, in_eager_macro_replacement: true}
   end
 
 
   # Finish processing a type expression.
 
-  def clear_type_expr_mode(context) do
-    %Context{context | in_type_expr: false, in_eager_macro_replacement: false}
+  def clear_type_expr_mode(context = %Context{}) do
+    %{context | in_type_expr: false, in_eager_macro_replacement: false}
   end
 
 
@@ -332,7 +332,7 @@ defmodule Erl2exVendored.Convert.Context do
 
   # Given an Erlang variable name, return the Elixir variable name.
 
-  def map_variable_name(context, name) do
+  def map_variable_name(context = %Context{}, name) do
     case Map.fetch(context.variable_map, name) do
       {:ok, mapped_name} ->
         if not context.in_bin_size_expr and context.match_level > 0 and name != :_ do
@@ -341,7 +341,7 @@ defmodule Erl2exVendored.Convert.Context do
             if needs_caret do
               context
             else
-              %Context{context |
+              %{context |
                 match_vars: MapSet.put(context.match_vars, name)
               }
             end
@@ -361,15 +361,15 @@ defmodule Erl2exVendored.Convert.Context do
 
   # Enter a size expression in a binary literal.
 
-  def start_bin_size_expr(context) do
-    %Context{context | in_bin_size_expr: true}
+  def start_bin_size_expr(context = %Context{}) do
+    %{context | in_bin_size_expr: true}
   end
 
 
   # Exit a size expression in a binary literal.
 
-  def finish_bin_size_expr(context) do
-    %Context{context | in_bin_size_expr: false}
+  def finish_bin_size_expr(context = %Context{}) do
+    %{context | in_bin_size_expr: false}
   end
 
 
@@ -384,8 +384,8 @@ defmodule Erl2exVendored.Convert.Context do
 
   # Enter a list of record fields and begin recording types.
 
-  def start_record_types(context) do
-    %Context{context |
+  def start_record_types(context = %Context{}) do
+    %{context |
       cur_record_types: [],
       in_eager_macro_replacement: true
     }
@@ -394,8 +394,8 @@ defmodule Erl2exVendored.Convert.Context do
 
   # Add a record field and type to the current definition.
 
-  def add_record_type(context, field, type) do
-    %Context{context |
+  def add_record_type(context = %Context{}, field, type) do
+    %{context |
       cur_record_types: [{field, type} | context.cur_record_types]
     }
   end
@@ -404,8 +404,8 @@ defmodule Erl2exVendored.Convert.Context do
   # Exit a list of record fields. Save the accumulated field info under the
   # given record name.
 
-  def finish_record_types(context, name) do
-    %Context{context |
+  def finish_record_types(context = %Context{}, name) do
+    %{context |
       record_types: Map.put(context.record_types, name, Enum.reverse(context.cur_record_types)),
       cur_record_types: [],
       in_eager_macro_replacement: false

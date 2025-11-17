@@ -856,7 +856,7 @@ defmodule Erl2exVendored.Convert.ErlExpressions do
   end
 
   defp conv_const(:MACHINE, _, context) do
-    {'BEAM', context}
+    {~c'BEAM', context}
   end
 
   defp conv_const(name, line, context) do

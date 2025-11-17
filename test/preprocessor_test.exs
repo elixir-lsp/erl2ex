@@ -240,7 +240,7 @@ defmodule PreprocessorTest do
 
     result = test_conversion(input, @opts)
     assert result.output == expected
-    assert apply(result.module, :foo, []) == '2 + 3'
+    assert apply(result.module, :foo, []) == ~c'2 + 3'
   end
 
 
@@ -273,7 +273,7 @@ defmodule PreprocessorTest do
 
     result = test_conversion(input, @opts)
     assert result.output == expected
-    assert apply(result.module, :foo, []) == '2 + 3hi'
+    assert apply(result.module, :foo, []) == ~c'2 + 3hi'
   end
 
 
@@ -885,7 +885,7 @@ defmodule PreprocessorTest do
 
     result = test_conversion(input, @opts)
     assert result.output == expected
-    assert apply(result.module, :foo, <<1>>) == <<1>>
+    assert apply(result.module, :foo, [<<1>>]) == <<1>>
   end
 
 end
